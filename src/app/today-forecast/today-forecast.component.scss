@@ -1,0 +1,44 @@
+$greenColor:#AAD1BD;
+$white-color:#F2F2F2;
+.img-u-1 {
+    max-width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../assets/pexels-valiphotos-589802.jpg');
+    background-size: auto;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.sunny-img {
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
+}
+
+.green-border {
+    border: 3px solid $greenColor;
+    border-radius: 20px;
+}
+
+.bg-u-1 {
+    background-color: $white-color;
+}
+
+.circle-u-1 {
+    background-color: $greenColor;
+    border-radius: 50%;
+    height: 147px;
+    width: 147px
+}
+
+.cloud-icon {
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
+    margin-left: 20px;
+}
+
+.heading {
+    font-size: 36px;
+}

@@ -1,0 +1,77 @@
+<section>
+    <div class="container">
+
+        <div class="row my-5">
+            <div class="col-md-6 order-md-1">
+                <div class="img-u-1">
+                </div>
+            </div>
+
+            <!-- spinner -->
+            <div class="spinner-border text-light" role="status" *ngIf="!forecastData">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <!-- ----- -->
+
+            <!-- forecast card -->
+            <div class="col-md-6 order-1 order-md-2 ">
+
+                <div class="d-flex flex-column justify-content-start align-items-center mt-3 green-border" *ngIf="forecastData">
+                    <div class="mb-2">
+                        <img class="sunny-img" src="/assets/sun.png" alt="">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+
+                        <h2 my-3>
+                            {{city| titlecase}}
+                        </h2>
+                        <button class="border-0 bg-transparent ms-2" (click)="getTodayForecast()">
+                  <img src="../../assets/icons8-refresh-32.png" alt="refresh forecast?">
+                </button>
+                    </div>
+                    <span class="heading">
+                       {{temp}} °C
+                  </span>
+                    <div class="">Feels like {{feelsLike}} °C. {{currentWeather| titlecase}} </div>
+                    <p><span>Today:</span> {{dt| date}}</p>
+
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img style="width:23px; max-width: 100%;" src="../../assets/icons8-wind-48.png" alt="">
+                            <span class="ms-2">
+                {{windSpeed }} m/s
+               </span>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center ms-3">
+                            <img style="width:23px; max-width: 100%;" src="../../assets/icons8-humidity-30.png" alt="">
+                            <span class="ms-2">
+                  {{humidity}}%
+                </span>
+                        </div>
+                    </div>
+                    <table class="table responsive-table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col-3" style="font-size: 20px;">8-day forecast</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr scope="row" *ngFor="let day of daily ">
+                                <th>{{day?.dt}}</th>
+                                <td>{{day.temp.max}} / {{day.temp.min}} °C </td>
+                                <td>{{day.weather[0].description}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+            <!-- ------ -->
+        </div>
+
+
+    </div>
+</section>
