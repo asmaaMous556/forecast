@@ -6,7 +6,7 @@ import { weather } from './../types/forecast';
 import { ForecastService } from './../service/forecast.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { forecast } from '../types/forecast';
+
 
 
 
@@ -31,6 +31,7 @@ lng!:number
 daily!:any[]
 forecastForm!:FormGroup
   country!: string;
+  cityName:string='';
   constructor(private forecast:ForecastService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -49,11 +50,11 @@ forecastForm!:FormGroup
 
 
   getTodayForecast(){
-    this.forecast.getCurrentWeather('cairo').subscribe(res=>{
+    this.forecast.getCurrentWeather(this.cityName?this.cityName :'cairo').subscribe(res=>{
       if(res){
    this.resHandling(res);
    this.getWeekForecast(res.coord.lat,res.coord.lon)
- 
+
  }},(error)=>{
       console.log(error);
 })}
@@ -69,8 +70,9 @@ getWeekForecast(lat:number,lng:number){
 }
 
   submit(){
- 
+    this.cityName=this.forecastForm.value.cityName
   this.forecast.getCurrentWeather(this.forecastForm.value.cityName).subscribe(res=>{
+
     this.resHandling(res);
     this.getWeekForecast(res.coord.lat,res.coord.lon)
 
