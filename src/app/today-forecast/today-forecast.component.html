@@ -1,39 +1,53 @@
 <section>
     <div class="container">
 
-        <div class="row my-5">
-            <div class="col-md-6 order-md-1">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-6">
+                <form [formGroup]="forecastForm" (ngSubmit)="submit()">
+                    <div class="input-group my-3">
+                        <input type="text" class="form-control" formControlName="cityName" placeholder="City Name">
+                        <button class="" type="submit" id="button-addon2">
+                      <i class="bi bi-search"></i>
+                    </button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-md-6 col-12 order-2 order-md-1">
                 <div class="img-u-1">
                 </div>
             </div>
 
-            <!-- spinner -->
-            <div class="spinner-border text-light" role="status" *ngIf="!forecastData">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <!-- ----- -->
+
 
             <!-- forecast card -->
-            <div class="col-md-6 order-1 order-md-2 ">
+            <div class="col-md-6 col-12 order-1 order-md-2">
 
-                <div class="d-flex flex-column justify-content-start align-items-center mt-3 green-border" *ngIf="forecastData">
+                <div class="d-flex flex-column justify-content-start align-items-center green-border" *ngIf="forecastData">
                     <div class="mb-2">
                         <img class="sunny-img" src="/assets/sun.png" alt="">
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
 
                         <h2 my-3>
-                            {{city| titlecase}}
+                            {{city| titlecase}}, <span>{{country}}</span>
                         </h2>
                         <button class="border-0 bg-transparent ms-2" (click)="getTodayForecast()">
-                  <img src="../../assets/icons8-refresh-32.png" alt="refresh forecast?">
+                          <i class="bi bi-arrow-clockwise"></i>
+                  <!-- <img src="../../assets/icons8-refresh-32.png" alt="refresh forecast?"> -->
                 </button>
                     </div>
                     <span class="heading">
-                       {{temp}} °C
+                       {{temp | number:'1.0-0'}} °C
                   </span>
-                    <div class="">Feels like {{feelsLike}} °C. {{currentWeather| titlecase}} </div>
-                    <p><span>Today:</span> {{dt| date}}</p>
+                    <div class="">Feels like {{feelsLike | number:'1.0-0'}} °C. {{currentWeather| titlecase}} </div>
+                    <p class="mb-0"><span>Today:</span> {{dt| dateFormat| date}}</p>
+                    <span class="mb-2" style="color:#eb6e4b">Last update {{dt| dateFormat| date:'shortTime'}}</span>
 
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center align-items-center">
@@ -58,8 +72,8 @@
                         </thead>
                         <tbody>
                             <tr scope="row" *ngFor="let day of daily ">
-                                <th>{{day?.dt}}</th>
-                                <td>{{day.temp.max}} / {{day.temp.min}} °C </td>
+                                <th>{{day?.dt| dateFormat | date}}</th>
+                                <td>{{day.temp.max | number:'1.0-0'}} / {{day.temp.min | number:'1.0-0'}} °C </td>
                                 <td>{{day.weather[0].description}}</td>
                             </tr>
                         </tbody>

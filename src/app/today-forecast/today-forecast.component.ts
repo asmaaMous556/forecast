@@ -1,9 +1,14 @@
+import { weather } from './../types/forecast';
+
 
 
 
 import { ForecastService } from './../service/forecast.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forecast } from '../types/forecast';
+
+
 
 @Component({
   selector: 'app-today-forecast',
@@ -19,64 +24,76 @@ public currentWeather:string=''
 public humidity:number=0;
 public windSpeed:number=0;
 public list !:any[]
- public dt!: Date;
+ public dt!: number;
 public currentDate!:Date
 lat!:number;
 lng!:number
 daily!:any[]
-  constructor(private forecast:ForecastService) { }
+forecastForm!:FormGroup
+  country!: string;
+  constructor(private forecast:ForecastService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.getTodayForecast();
+    this.initForm()
 
   }
 
-
-  getWeekForecast(){
-    this.forecast.getForecastData(this.lat,this.lng).subscribe(res=>{
-      console.log(res);
-
+  initForm(){
+    this.forecastForm=this.fb.group({
+      cityName:this.fb.control('',[Validators.required])
     })
+
   }
+
 
 
   getTodayForecast(){
-    this.forecast.getCurrentWeather().subscribe(res=>{
+    this.forecast.getCurrentWeather('cairo').subscribe(res=>{
       if(res){
-        console.log(res);
-      this.forecastData=true
-      this.city=res.name;
-      this.feelsLike=res.main.feels_like;
-      this.currentWeather=res.weather[0].description
-      this.temp=res.main.temp
-      this.humidity=res.main.humidity
-      this.windSpeed=res.wind.speed
-      this.lat=res.coord.lat
-      this.lng=res.coord.lon
-      console.log(this.lng);
-
-
- this.forecast.getForecastData(this.lat,this.lng).subscribe(res=>{
-   console.log(res);
-   this.daily=res.daily
-
- })
-
-      // this.city=res.city.name;
-      // this.feelsLike=res.list[0].main.feels_like;
-      // this.currentWeather=res.list[0].weather[0].description
-      // this.temp=res.list[0].main.temp
-      // this.humidity=res.list[0].main.humidity
-      // this.windSpeed=res.list[0].wind.speed
-      // this.dt=res.list[0].dt_txt
-
-    }
-
-    },(error)=>{
+   this.resHandling(res);
+   this.getWeekForecast(res.coord.lat,res.coord.lon)
+ 
+ }},(error)=>{
       console.log(error);
+})}
 
-    })
+getWeekForecast(lat:number,lng:number){
+  this.forecast.getForecastData(lat,lng).subscribe(res=>{
+    this.daily=res.daily
 
+  },(error)=>{
+    console.log(error);
+
+  })
+}
+
+  submit(){
+ 
+  this.forecast.getCurrentWeather(this.forecastForm.value.cityName).subscribe(res=>{
+    this.resHandling(res);
+    this.getWeekForecast(res.coord.lat,res.coord.lon)
+
+
+  },(error)=>{
+    console.log(error);
+
+  })}
+
+
+  resHandling(res:weather){
+
+    this.forecastData=true
+    this.city=res.name;
+    this.feelsLike=res.main.feels_like;
+    this.currentWeather=res.weather[0].description
+    this.temp=res.main.temp
+    this.humidity=res.main.humidity
+    this.windSpeed=res.wind.speed
+    this.lat=res.coord.lat
+    this.lng=res.coord.lon
+    this.dt=res.dt
+    this.country=res.sys.country
   }
 
 }
