@@ -1,23 +1,23 @@
 <section>
+    <div class="row w-100 mw-100 d-flex justify-content-center align-items-center bg-light">
+        <div class="col-12 col-md-6 p-3">
+            <form [formGroup]="forecastForm" (ngSubmit)="submit()">
+                <div class="input-group my-3">
+                    <input type="text" class="form-control" formControlName="cityName" placeholder="City Name">
+                    <button class="submit-btn border-0" type="submit" id="button-addon2">
+                      <i style="color: white;" class="bi bi-search"></i>
+            </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
     <div class="container">
 
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-12 col-md-6">
-                <form [formGroup]="forecastForm" (ngSubmit)="submit()">
-                    <div class="input-group my-3">
-                        <input type="text" class="form-control" formControlName="cityName" placeholder="City Name">
-                        <button class="" type="submit" id="button-addon2">
-                      <i class="bi bi-search"></i>
-                    </button>
-                    </div>
-
-                </form>
 
 
-            </div>
-        </div>
-
-        <div class="row my-2">
+        <div class="row my-2 mw-100">
             <div class="col-md-6 col-12 order-2 order-md-1">
                 <div class="img-u-1">
                 </div>
@@ -38,7 +38,7 @@
                             {{city| titlecase}}, <span>{{country}}</span>
                         </h2>
                         <button class="border-0 bg-transparent ms-2" (click)="getTodayForecast()">
-                          <i class="bi bi-arrow-clockwise"></i>
+                          <i style="font-size: 32px;" class="bi bi-arrow-clockwise"></i>
                   <!-- <img src="../../assets/icons8-refresh-32.png" alt="refresh forecast?"> -->
                 </button>
                     </div>
