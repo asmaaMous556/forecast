@@ -51,7 +51,8 @@ temp_kf: number
   visibility: 10000,
 
   sys: {
-  pod: number
+
+  country:string
   }
  name:string
  }

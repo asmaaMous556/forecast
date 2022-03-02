@@ -4,7 +4,7 @@
 
 
 export const environment = {
-  API:'https://api.openweathermap.org/data/2.5/forecast',
+  API:'',
   production: false
 };
 

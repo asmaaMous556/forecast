@@ -17,11 +17,12 @@ export class ForecastService {
 
   constructor(private http:HttpClient) { }
 
-  getCurrentWeather(){
+  getCurrentWeather(cityName:string){
+
 
    return this.http.get(this.currentWeatherAPI,{
      params:{
-       'q':'cairo',
+       'q':cityName,
        'appid':this.ApiKey,
        'units':this.unit
      }
