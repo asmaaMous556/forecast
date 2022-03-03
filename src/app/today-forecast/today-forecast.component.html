@@ -23,9 +23,11 @@
             <div class="col-md-6 col-12 order-1 order-md-2">
 
                 <div class="d-flex flex-column justify-content-start align-items-center green-border" *ngIf="forecastData">
+
                     <div class="alert alert-danger w-100 text-center" *ngIf="error">
                         {{error}}
                     </div>
+
                     <div class="my-2">
                         <img class="sunny-img" [src]="currentWeather.includes('clear')? '../../assets/sunny.png' :'../../assets/cloudy.png'" alt="">
                     </div>
