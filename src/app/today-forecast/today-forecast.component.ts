@@ -3,7 +3,7 @@ import { forecast, weather } from './../types/forecast';
 
 import { ForecastService } from './../service/forecast.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -100,6 +100,10 @@ getWeekForecast(lat:number,lng:number){
     this.lng=res.coord.lon
     this.dt=res.dt
     this.country=res.sys.country
+  }
+
+  get cityCtrl (){
+  return   this.forecastForm.get('cityName') as FormControl
   }
 
 }
