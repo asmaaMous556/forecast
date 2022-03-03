@@ -1,6 +1,4 @@
-import { weather } from './../types/forecast';
-
-
+import { forecast, weather } from './../types/forecast';
 
 
 import { ForecastService } from './../service/forecast.service';
@@ -65,11 +63,16 @@ getWeekForecast(lat:number,lng:number){
   this.forecast.getForecastData(lat,lng).subscribe(res=>{
     this.daily=res.daily
 
+
+
   },(error)=>{
     console.log(error);
-
   })
 }
+
+
+
+
 
   submit(){
     this.cityName=this.forecastForm.value.cityName
@@ -77,7 +80,6 @@ getWeekForecast(lat:number,lng:number){
 
     this.resHandling(res);
     this.getWeekForecast(res.coord.lat,res.coord.lon)
-
 
   },(error)=>{
     this.error=error.error.message
