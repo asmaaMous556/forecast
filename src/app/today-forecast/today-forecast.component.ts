@@ -32,6 +32,7 @@ daily!:any[]
 forecastForm!:FormGroup
   country!: string;
   cityName:string='';
+  error: string='';
   constructor(private forecast:ForecastService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -57,6 +58,7 @@ forecastForm!:FormGroup
 
  }},(error)=>{
       console.log(error);
+
 })}
 
 getWeekForecast(lat:number,lng:number){
@@ -78,7 +80,7 @@ getWeekForecast(lat:number,lng:number){
 
 
   },(error)=>{
-    console.log(error);
+    this.error=error.error.message
 
   })}
 

@@ -5,31 +5,29 @@
                 <div class="input-group my-3">
                     <input type="text" class="form-control" formControlName="cityName" placeholder="City Name">
                     <button class="submit-btn border-0" type="submit" id="button-addon2">
-                      <i style="color: white;" class="bi bi-search"></i>
-            </button>
+                      <i style="color: white;" class="bi bi-search">
+                    </i>
+                    </button>
                 </div>
             </form>
-
-
         </div>
     </div>
     <div class="container">
-
-
-
         <div class="row my-2 mw-100">
             <div class="col-md-6 col-12 order-2 order-md-1">
                 <div class="img-u-1">
                 </div>
             </div>
 
-
-
             <!-- forecast card -->
             <div class="col-md-6 col-12 order-1 order-md-2">
 
+
                 <div class="d-flex flex-column justify-content-start align-items-center green-border" *ngIf="forecastData">
-                    <div class="mb-2">
+                    <div class="alert alert-danger w-100 text-center" *ngIf="error">
+                        {{error}}
+                    </div>
+                    <div class="my-2">
                         <img class="sunny-img" src="/assets/sun.png" alt="">
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
@@ -79,13 +77,8 @@
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-
             <!-- ------ -->
         </div>
-
-
     </div>
 </section>
