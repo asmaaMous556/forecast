@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="row my-2 mw-100">
+        <div class="row mb-2 mw-100">
             <div class="col-md-6 col-12 order-2 order-md-1">
                 <div class="img-u-1">
                 </div>
@@ -22,13 +22,12 @@
             <!-- forecast card -->
             <div class="col-md-6 col-12 order-1 order-md-2">
 
-
                 <div class="d-flex flex-column justify-content-start align-items-center green-border" *ngIf="forecastData">
                     <div class="alert alert-danger w-100 text-center" *ngIf="error">
                         {{error}}
                     </div>
                     <div class="my-2">
-                        <img class="sunny-img" src="/assets/sun.png" alt="">
+                        <img class="sunny-img" [src]="currentWeather.includes('clear')? '../../assets/sunny.png' :'../../assets/cloudy.png'" alt="">
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
 
@@ -37,7 +36,7 @@
                         </h2>
                         <button class="border-0 bg-transparent ms-2" (click)="getTodayForecast()">
                           <i style="font-size: 32px;" class="bi bi-arrow-clockwise"></i>
-                  <!-- <img src="../../assets/icons8-refresh-32.png" alt="refresh forecast?"> -->
+
                 </button>
                     </div>
                     <span class="heading">
@@ -72,7 +71,10 @@
                             <tr scope="row" *ngFor="let day of daily ">
                                 <th>{{day?.dt| dateFormat | date}}</th>
                                 <td>{{day.temp.max | number:'1.0-0'}} / {{day.temp.min | number:'1.0-0'}} °C </td>
-                                <td>{{day.weather[0].description}}</td>
+                                <td>
+                                    <img [src]="day.weather[0].description.includes('clear')? '../../assets/sunny.png' :'../../assets/cloudy.png'" alt="" class="mw-100" style="width:35px"> {{day.weather[0].description}}
+
+                                </td>
                             </tr>
                         </tbody>
                     </table>

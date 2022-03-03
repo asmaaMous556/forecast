@@ -61,12 +61,10 @@ temp_kf: number
   daily: [
     {
     dt: number,
-
     temp: {
       day: number,
-
       min: number,
-    max: number,
+      max: number,
     },
     feels_like: {
     day: number,
